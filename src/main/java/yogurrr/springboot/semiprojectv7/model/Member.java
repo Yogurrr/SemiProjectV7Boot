@@ -1,10 +1,24 @@
 package yogurrr.springboot.semiprojectv7.model;
 
-import lombok.Data;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
-@Data
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "member")
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
-    private String mbno;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long mbno;
+
     private String name;
     private String jumin1;
     private String jumin2;
@@ -15,5 +29,7 @@ public class Member {
     private String addr2;
     private String email;
     private String phone;
-    private String regdate;
+
+    @CreatedDate
+    private LocalDateTime regdate;
 }
