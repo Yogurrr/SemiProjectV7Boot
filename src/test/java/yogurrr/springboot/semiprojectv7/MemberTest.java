@@ -9,6 +9,9 @@ import yogurrr.springboot.semiprojectv7.repository.MemberRepository;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+
 @SpringBootTest
 public class MemberTest {
 
@@ -50,5 +53,20 @@ public class MemberTest {
         m.setMbno(4L);
 
         memberRepository.delete(m);
+    }
+
+    @Test
+    @DisplayName("member login")
+    public void loginMember() {
+        Member m = new Member();
+        m.setUserid("1");
+        m.setPasswd("1");
+
+        assertNull(memberRepository.findByUseridAndPasswd(m.getUserid(), m.getPasswd()));
+
+        m.setUserid("0");
+        m.setPasswd("0");
+
+        assertNotNull(memberRepository.findByUseridAndPasswd(m.getUserid(), m.getPasswd()));
     }
 }
