@@ -31,5 +31,6 @@ public class Member {
     private String phone;
 
     @CreatedDate
+    @Column(insertable = false, updatable = false)
     private LocalDateTime regdate;
 }
