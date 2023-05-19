@@ -10,5 +10,5 @@ public interface BoardService {
     int countBoard();
     int countBoard(String ftype, String fkey);
     boolean newBoard(Board bd);
-    Board readOneBoard(String bno);
+    Board readOneBoard(int bno);
 }
