@@ -29,6 +29,11 @@ public interface BoardRepository extends PagingAndSortingRepository<Board, Long>
     List<Board> findByUserid(Pageable paging, String fkey);
     List<Board> findByContentsContains(Pageable paging, String fkey);
 
+    int countByTitleContains(String fkey);
+    int countByTitleContainsOrContentsContains(String fkey1, String fkey2);
+    int countByUserid(String fkey);
+    int countByContentsContains(String fkey);
+
     // @Query("select bno,title,userid,regdate,thumbs,views from board where :ftype = :fkey", nativeQuery = true)
     // List<Board> findBoardBy(Pageable paging, String ftype, String fkey);
 }
