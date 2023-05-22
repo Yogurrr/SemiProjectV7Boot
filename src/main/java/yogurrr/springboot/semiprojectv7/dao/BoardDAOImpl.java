@@ -28,8 +28,15 @@ public class BoardDAOImpl implements BoardDAO{
 
     @Override
     public List<Board> selectBoard(Map<String, Object> params) {
+
+        // like 검색에 대한 query method
+        // findByTitleLike              : %검색어% (% 문자 제공 필요)
+        // findByTitleConatins          : %검색어% (% 문자 제공 필요 X)
+        // findByTitleStartsWith        : %검색어% (% 문자 제공 필요 X)
+        // findByTitleEndsWith          : %검색어% (% 문자 제공 필요 X)
+
         String fkey = params.get("fkey").toString();
-        String ftype = '%' + params.get("ftype").toString() + '%';
+        String ftype = params.get("ftype").toString();
         int cpage = (int) params.get("stbno");
 
         Pageable paging = PageRequest.of(cpage, 25, Sort.Direction.DESC, "bno");
@@ -38,17 +45,16 @@ public class BoardDAOImpl implements BoardDAO{
 
         switch (ftype) {
             case "title" : // 제목으로 검색
-                result = boardRepository.findByTitleLike(paging, fkey); break;
+                result = boardRepository.findByTitleContains(paging, fkey); break;
 
             case "titcont" : // 제목 + 본문으로 검색
-                result = boardRepository.findByTitleLikeOrContentsLike(paging, fkey, fkey); break;
+                result = boardRepository.findByTitleContainsOrContentsContains(paging, fkey, fkey); break;
 
             case "userid" : // 작성자로 검색
-                fkey = fkey.replace("%", "");
                 result = boardRepository.findByUserid(paging, fkey); break;
 
             case "contents" : // 본문으로 검색
-                result = boardRepository.findByContentsLike(paging, fkey);
+                result = boardRepository.findByContentsContains(paging, fkey);
         }
 
         return result;
