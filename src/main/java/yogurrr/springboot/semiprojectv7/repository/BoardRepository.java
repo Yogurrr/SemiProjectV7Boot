@@ -1,5 +1,6 @@
 package yogurrr.springboot.semiprojectv7.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import yogurrr.springboot.semiprojectv7.model.Board;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 // public interface BoardRepository extends JpaRepository<Board, Long> {
 public interface BoardRepository extends PagingAndSortingRepository<Board, Long> {
@@ -21,4 +23,9 @@ public interface BoardRepository extends PagingAndSortingRepository<Board, Long>
 
     // @Query("select ceil(count(bno)/25) from Board")
     int countBoardBy();
+
+    List<Board> findByTitle(Pageable paging, String fkey);
+    List<Board> findByTitleOrContents(Pageable paging, String fkey1, String fkey2);
+    List<Board> findByUserid(Pageable paging, String fkey);
+    List<Board> findByContents(Pageable paging, String fkey);
 }

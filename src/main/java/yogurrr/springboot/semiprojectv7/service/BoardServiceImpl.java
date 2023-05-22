@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> readBoard(int cpage, String ftype, String fkey) {
-        int stbno = (cpage - 1) * 25;
+        int stbno = (cpage - 1);
 
         // 처리 시 사용할 데이터들을 해쉬맵에 담아서 보냄
         Map<String, Object> params = new HashMap<>();   // mybatis는 이름으로 받아오는데 이처럼 이름으로 받아올 수 있는 유일한 자료구조
