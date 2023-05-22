@@ -30,7 +30,10 @@ public class BoardDAOImpl implements BoardDAO{
 
     @Override
     public int countBoard() {
-        return 0;
+        // select ceil(count(bno)/25) from board
+        int allcnt = boardRepository.countBoardBy();
+
+        return (int) Math.ceil(allcnt / 25);
     }
 
     @Override
@@ -45,7 +48,7 @@ public class BoardDAOImpl implements BoardDAO{
 
     @Override
     public Board selectOneBoard(int bno) {
-        boardRepository.countViewBorad(bno);
-        return boardRepository.findById((long)bno).get();
+        boardRepository.countViewBorad((long) bno);
+        return boardRepository.findById((long) bno).get();
     }
 }
