@@ -22,7 +22,7 @@ public interface BoardRepository extends PagingAndSortingRepository<Board, Long>
     int countViewBorad(@Param("bno") long bno);
 
     // @Query("select ceil(count(bno)/25) from Board")
-    int countBoardBy();
+//    int countBoardBy();
 
     List<Board> findByTitleContains(Pageable paging, String fkey);
     List<Board> findByTitleContainsOrContentsContains(Pageable paging, String fkey1, String fkey2);

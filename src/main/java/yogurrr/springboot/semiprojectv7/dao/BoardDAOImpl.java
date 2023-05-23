@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import yogurrr.springboot.semiprojectv7.model.Board;
 import yogurrr.springboot.semiprojectv7.repository.BoardRepository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,19 @@ public class BoardDAOImpl implements BoardDAO{
     BoardRepository boardRepository;
 
     @Override
-    public List<Board> selectBoard(int cpage) {
+    public Map<String, Object> selectBoard(int cpage) {
         // 페이징 시 저열 순서 지정
         Pageable paging = PageRequest.of(cpage, 25, Sort.by("bno").descending());
         // PageRequest.of(cpage, 25, Sort.Direction.DESC, "bno");
 
-        return boardRepository.findAll(paging).getContent();
+        List<Board> bdlist = boardRepository.findAll(paging).getContent();
+        int cntpg = boardRepository.findAll(paging).getTotalPages();
+
+        Map<String, Object> bds = new HashMap<>();
+        bds.put("bdlist", bdlist);
+        bds.put("cntpg", cntpg);
+
+        return bds;
     }
 
     @Override
@@ -58,14 +66,6 @@ public class BoardDAOImpl implements BoardDAO{
         }
 
         return result;
-    }
-
-    @Override
-    public int countBoard() {
-        // select ceil(count(bno)/25) from board
-        int allcnt = boardRepository.countBoardBy();
-
-        return (int) Math.ceil(allcnt / 25);
     }
 
     @Override

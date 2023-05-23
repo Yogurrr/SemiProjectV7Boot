@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import yogurrr.springboot.semiprojectv7.model.Board;
 import yogurrr.springboot.semiprojectv7.service.BoardService;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -17,13 +19,19 @@ public class BoardController {
     private BoardService bdsrv;
 
     @GetMapping("/list")
-    public ModelAndView list(int cpg) {
+    public ModelAndView list(Integer cpg) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("board/list");
-        mv.addObject("bdlist", bdsrv.readBoard(cpg));
+
+        if (cpg == null || cpg == 0) cpg = 1;
+
+        Map<String, Object> bds = bdsrv.readBoard(cpg);
+
+        mv.addObject("bdlist", bds.get("bdlist"));
         mv.addObject("cpg", cpg);
+        mv.addObject("cntpg", bds.get("cntpg"));
         mv.addObject("stpg", ((cpg - 1) / 10) * 10 + 1);
-        mv.addObject("cntpg", bdsrv.countBoard());
+
+        mv.setViewName("board/list");
 
         return mv;
     }

@@ -16,14 +16,16 @@ public class BoardServiceImpl implements BoardService {
     private BoardDAO bddao;
 
     @Override
-    public List<Board> readBoard(int cpage) {
-//        int stbno = (cpage - 1) * 25;
+    public Map<String, Object> readBoard(int cpage) {
+
         return bddao.selectBoard(cpage - 1);
+//        return bddao.selectBoard(cpage);
     }
 
     @Override
     public List<Board> readBoard(int cpage, String ftype, String fkey) {
-        int stbno = (cpage - 1);
+//        int stbno = (cpage - 1);
+        int stbno = cpage;
 
         // 처리 시 사용할 데이터들을 해쉬맵에 담아서 보냄
         Map<String, Object> params = new HashMap<>();   // mybatis는 이름으로 받아오는데 이처럼 이름으로 받아올 수 있는 유일한 자료구조
@@ -34,10 +36,10 @@ public class BoardServiceImpl implements BoardService {
         return bddao.selectBoard(params);
     }
 
-    @Override
+    /*@Override
     public int countBoard() {
         return bddao.countBoard();
-    }
+    }*/
 
     @Override
     public int countBoard(String ftype, String fkey) {
