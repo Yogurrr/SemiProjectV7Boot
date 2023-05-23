@@ -1,5 +1,6 @@
 package yogurrr.springboot.semiprojectv7.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,15 +25,15 @@ public interface BoardRepository extends PagingAndSortingRepository<Board, Long>
     // @Query("select ceil(count(bno)/25) from Board")
 //    int countBoardBy();
 
-    List<Board> findByTitleContains(Pageable paging, String fkey);
-    List<Board> findByTitleContainsOrContentsContains(Pageable paging, String fkey1, String fkey2);
-    List<Board> findByUserid(Pageable paging, String fkey);
-    List<Board> findByContentsContains(Pageable paging, String fkey);
+    Page<Board> findByTitleContains(Pageable paging, String fkey);
+    Page<Board> findByTitleContainsOrContentsContains(Pageable paging, String fkey1, String fkey2);
+    Page<Board> findByUserid(Pageable paging, String fkey);
+    Page<Board> findByContentsContains(Pageable paging, String fkey);
 
-    int countByTitleContains(String fkey);
-    int countByTitleContainsOrContentsContains(String fkey1, String fkey2);
-    int countByUserid(String fkey);
-    int countByContentsContains(String fkey);
+//    int countByTitleContains(String fkey);
+//    int countByTitleContainsOrContentsContains(String fkey1, String fkey2);
+//    int countByUserid(String fkey);
+//    int countByContentsContains(String fkey);
 
     // @Query("select bno,title,userid,regdate,thumbs,views from board where :ftype = :fkey", nativeQuery = true)
     // List<Board> findBoardBy(Pageable paging, String ftype, String fkey);

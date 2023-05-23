@@ -1,6 +1,7 @@
 package yogurrr.springboot.semiprojectv7.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,7 +36,7 @@ public class BoardDAOImpl implements BoardDAO{
     }
 
     @Override
-    public List<Board> selectBoard(Map<String, Object> params) {
+    public Map<String, Object> selectBoard(Map<String, Object> params) {
 
         // like 검색에 대한 query method
         // findByTitleLike              : %검색어% (% 문자 제공 필요)
@@ -49,7 +50,7 @@ public class BoardDAOImpl implements BoardDAO{
 
         Pageable paging = PageRequest.of(cpage, 25, Sort.Direction.DESC, "bno");
 
-        List<Board> result = null;
+        Page<Board> result = null;
 
         switch (ftype) {
             case "title" : // 제목으로 검색
@@ -65,32 +66,36 @@ public class BoardDAOImpl implements BoardDAO{
                 result = boardRepository.findByContentsContains(paging, fkey);
         }
 
-        return result;
+        Map<String, Object> bds = new HashMap<>();
+        bds.put("bdlist", result.getContent());
+        bds.put("cntpg", result.getTotalPages());
+
+        return bds;
     }
 
-    @Override
-    public int countBoard(Map<String, Object> params) {
-
-        String fkey = params.get("fkey").toString();
-        String ftype = params.get("ftype").toString();
-
-        int cnt = 0;
-        switch (ftype) {
-            case "title" : // 제목으로 검색
-                cnt = boardRepository.countByTitleContains(fkey); break;
-
-            case "titcont" : // 제목 + 본문으로 검색
-                cnt = boardRepository.countByTitleContainsOrContentsContains(fkey, fkey); break;
-
-            case "userid" : // 작성자로 검색
-                cnt = boardRepository.countByUserid(fkey); break;
-
-            case "contents" : // 본문으로 검색
-                cnt = boardRepository.countByContentsContains(fkey);
-        }
-
-        return (int) Math.ceil(cnt / 25);
-    }
+//    @Override
+//    public int countBoard(Map<String, Object> params) {
+//
+//        String fkey = params.get("fkey").toString();
+//        String ftype = params.get("ftype").toString();
+//
+//        int cnt = 0;
+//        switch (ftype) {
+//            case "title" : // 제목으로 검색
+//                cnt = boardRepository.countByTitleContains(fkey); break;
+//
+//            case "titcont" : // 제목 + 본문으로 검색
+//                cnt = boardRepository.countByTitleContainsOrContentsContains(fkey, fkey); break;
+//
+//            case "userid" : // 작성자로 검색
+//                cnt = boardRepository.countByUserid(fkey); break;
+//
+//            case "contents" : // 본문으로 검색
+//                cnt = boardRepository.countByContentsContains(fkey);
+//        }
+//
+//        return (int) Math.ceil(cnt / 25);
+//    }
 
     @Override
     public int insertBoard(Board bd) {

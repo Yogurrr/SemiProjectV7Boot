@@ -40,11 +40,15 @@ public class BoardController {
     @GetMapping("/find")
     public ModelAndView find(int cpg, String ftype, String fkey) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("board/list");
-        mv.addObject("bdlist", bdsrv.readBoard(cpg, ftype, fkey));
+
+        Map<String, Object> bds = bdsrv.readBoard(cpg, ftype, fkey);
+
+        mv.addObject("bdlist", bds.get("bdlist"));
         mv.addObject("cpg", cpg);
+        mv.addObject("cntpg", bds.get("cntpg"));
         mv.addObject("stpg", ((cpg - 1) / 10) * 10 + 1);
-        mv.addObject("cntpg", bdsrv.countBoard(ftype, fkey));
+
+        mv.setViewName("board/list");
 
         return mv;
     }
