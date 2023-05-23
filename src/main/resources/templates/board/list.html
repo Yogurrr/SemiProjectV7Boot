@@ -7,7 +7,7 @@
 
     <th:block th:if="${cpg gt cntpg}">
         <script th:inline="javascript">
-            location.href="/board/list?cpg=" + [[${cntpg}]];
+            location.href=[[${pglink}]] + [[${cntpg}]];
         </script>
     </th:block>
 
