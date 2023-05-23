@@ -33,7 +33,7 @@
                     <label class="col-3 col-form-label text-danger text-end" for="title">제목</label>
                     <div class="col-6">
                         <input type="text" name="title" id="title" class="form-control border-danger">
-                        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-warning"></span>
                     </div>
                 </div>
 
@@ -41,6 +41,7 @@
                     <label class="col-3 col-form-label text-danger text-end" for="userid">작성자</label>
                     <div class="col-6">
                         <input type="text" name="userid" id="userid" class="form-control border-danger bg-light" value="aaa111" readonly>
+                        <span th:if="${#fields.hasErrors('userid')}" th:errors="*{userid}" class="text-warning"></span>
                     </div>
                 </div>
 
@@ -48,6 +49,7 @@
                     <label class="col-3 col-form-label text-danger text-end" for="contents">본문</label>
                     <div class="col-6">
                         <textarea name="contents" id="contents" class="form-control border-danger" rows="15"></textarea>
+                        <span th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" class="text-warning"></span>
                     </div>
                 </div>
 
