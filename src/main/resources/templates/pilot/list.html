@@ -16,8 +16,8 @@
             <p th:text="${attach}"></p>
             <p th:text="${filename}"></p>
             <p th:text="${filetype}"></p>
-            <p th:text="${filesize}">KB</p>
-            <p th:text="${uuid}">KB</p>
+            <p th:text="|${filesize} KB|"></p>
+            <p th:text="${uuid}"></p>
         </div>
 
         <div>
@@ -27,9 +27,13 @@
         </div>
 
         <div>
-            <p><a href="/assets/pilot/golden-eagle.jpg">이미지</a></p>
-            <p><a href="/assets/pilot/write.html">텍스트</a></p>
-            <p><a href="/assets/pilot/pics.zip">압축파일</a></p>
+            <p><a href="/assets/pilot/golden-eagle.jpg">이미지2</a></p>
+            <p><a href="/assets/pilot/write.html">텍스트2</a></p>
+            <p><a href="/assets/pilot/pics.zip">압축파일2</a></p>
+        </div>
+
+        <div>
+            <img src="/pilot/showimg">
         </div>
     </div>
 
