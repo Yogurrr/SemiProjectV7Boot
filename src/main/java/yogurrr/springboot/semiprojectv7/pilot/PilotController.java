@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
 
-import javax.xml.ws.Response;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -46,7 +45,7 @@ public class PilotController {
             String fname = attach.getOriginalFilename();
 
             // 업로드한 파일 이름 알아내기
-            m.addAttribute("filename", attach.getOriginalFilename());
+            m.addAttribute("filename", fname);
 
             // 업로드한 파일 종류 알아내기
             m.addAttribute("filetype", attach.getContentType());
@@ -84,17 +83,18 @@ public class PilotController {
     @GetMapping("/down")
     public ResponseEntity<Resource> down(int pno) throws IOException {
 
+        // 다운로드 전송할 파일 식별
         String savePath = "C:/Java/bootUpload/";
         String fname = "";
-        if (pno == 1) fname += "golden-eagle.jpg";
-        else if (pno == 2) fname += "write.html";
-        else if (pno == 3) fname += "pics.zip";
+        if (pno == 1) fname = "bird.jpg";
+        else if (pno == 2) fname = "write.html";
+        else if (pno == 3) fname = "pics.zip";
 
         // 파일이름에 한글이 포함된 경우 적절한 인코딩 작업 수행
         fname = UriUtils.encode(fname, StandardCharsets.UTF_8);
 
         // 다운로드할 파일 객체 생성
-        UrlResource resource = new UrlResource("file: " + (savePath+fname));
+        UrlResource resource = new UrlResource("file:" + (savePath+fname));
 
         // MIME 타입 지정
         // 브라우저에 다운로드할 파일에 대한 정보 제공
@@ -109,8 +109,8 @@ public class PilotController {
     @GetMapping("/showimg")
     @ResponseBody   // view 없이 본문 출력
     public Resource showimg() throws MalformedURLException {
-        String fname = "C:/Java?bootUpload/" + "golden-eagle.jpg";
+        String fname = "C:/Java/bootUpload/" + "bird.jpg";
 
-        return new UrlResource("file: " + fname);
+        return new UrlResource("file:" + fname);
     }
 }
