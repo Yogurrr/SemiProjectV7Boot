@@ -30,6 +30,8 @@ public class PilotController {
         // 멀티파트 폼 요소 처리
         if (attach.isEmpty()) m.addAttribute("attach", "첨부파일이 없어요!!");
         else {
+            String fname = attach.getOriginalFilename();
+
             // 업로드한 파일 이름 알아내기
             m.addAttribute("filename", attach.getOriginalFilename());
 
@@ -40,11 +42,17 @@ public class PilotController {
             m.addAttribute("filesize", attach.getSize()/1024);
 
             // 겹치지 않는 파일명 작성을 위해 유니크한 값 생성 1
-            UUID uuid = UUID.randomUUID();
+            // 파일이름 + uuid + 확장자
+            // abc.jpg -> abcsdfwe-rwr54we6-r54ewtwe.jpg
+            String uuid = UUID.randomUUID().toString().replace("-", "");   // uuid에서 '-' 제거
             m.addAttribute("uuid", uuid);
 
+            // 파일이름과 생성자 분리하기
+            String fileName = fname.split("[.]")[0];
+            String fileExt = fname.split("[.]")[1];
+
             // 업로드한 파일 저장하기
-            attach.transferTo(new File("C:/Java/bootUpload/" + uuid + attach.getOriginalFilename()));
+            attach.transferTo(new File("C:/Java/bootUpload/" + fileName + uuid + "." + fileExt));
         }
 
         return "pilot/list";
