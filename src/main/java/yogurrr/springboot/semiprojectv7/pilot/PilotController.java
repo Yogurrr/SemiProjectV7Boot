@@ -1,18 +1,23 @@
 package yogurrr.springboot.semiprojectv7.pilot;
 
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -57,7 +62,7 @@ public class PilotController {
 
             // 겹치지 않는 파일명 작성을 위해 유니크한 값 생성 2
             uuid = LocalDate.now() + "" + LocalTime.now();
-            uuid.replace("-", "").replace(":", "").replace(".", "");
+            uuid = uuid.replace("-", "").replace(":", "").replace(".", "");
             m.addAttribute("uuid", uuid);
 
             // 업로드한 파일 저장하기
@@ -70,5 +75,31 @@ public class PilotController {
     @GetMapping("/list")
     public String list() {
         return "pilot/list";
+    }
+
+    @GetMapping("/down")
+    public ResponseEntity<UrlResource> down(int pno) throws IOException {
+
+        String savePath = "C:/Java/bootUpload/";
+        String fname = "";
+        if (pno == 1) fname += "golden-eagle.jpg";
+        else if (pno == 2) fname += "write.html";
+        else if (pno == 3) fname += "pics.zip";
+
+        // 파일이름에 한글이 포함된 경우 적절한 인코딩 작업 수행
+        fname = UriUtils.encode(fname, StandardCharsets.UTF_8);
+
+        // 다운로드할 파일 객체 생성
+        UrlResource resource = new UrlResource("file: " + (savePath+fname));
+
+        // MIME 타입 지정
+        // 브라우저에 다운로드할 파일에 대한 정보 제공
+        HttpHeaders header = new HttpHeaders();
+        header.add("Content-Type", Files.probeContentType(Paths.get(savePath+fname)));
+        header.add("Content-Disposition", "attachment; filename=" + fname + "");
+
+        // 브라우저로 파일 전송하기
+        return ResponseEntity.ok().headers(header).body(resource);
+//        return null;
     }
 }
