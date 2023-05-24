@@ -26,12 +26,14 @@ public class Member {
     private String jumin2;
 
     @NotBlank(message = "아이디는 필수항목입니다!!")
-    @Length(min = 6, max = 16, message = "아이디는 최소 6자, 최대 16자여야 합니다!!")
+    @Length(min=6, max=16, message = "아이디는 최소6자, 최대16자이어야 합니다!!")
     private String userid;
 
     @NotBlank(message = "비밀번호는 필수항목입니다!!")
-    @Length(min = 6, max = 16, message = "비밀번호는 최소 6자, 최대 16자여야 합니다!!")
+    @Length(min=6, max=16, message = "비밀번호는 최소6자, 최대16자이어야 합니다!!")
     private String passwd;
+
+    private String zipcode;
 
     @NotBlank(message = "기본주소는 필수항목입니다!!")
     private String addr1;
@@ -39,17 +41,15 @@ public class Member {
     @NotBlank(message = "나머지주소는 필수항목입니다!!")
     private String addr2;
 
-    @NotBlank(message = "이메일은 필수항목입니다!!")
     private String email;
 
-    @NotBlank(message = "전화번호는 필수항목입니다!!")
     private String phone;
 
     @CreatedDate
     @Column(insertable = false, updatable = false)
     private LocalDateTime regdate;
 
-    // ---------------------------------
+    // -----------------------------
 
     @Transient   // 필드 영속성은 지원 x
     @NotBlank(message = "우편번호는 필수항목입니다!!")
@@ -74,4 +74,5 @@ public class Member {
     @Transient
     @NotBlank(message = "전화번호는 필수항목입니다!!")
     private String tel3;
+
 }

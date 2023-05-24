@@ -10,8 +10,7 @@ import yogurrr.springboot.semiprojectv7.model.Member;
 @Service("jnsrv")
 public class JoinServiceImpl implements JoinService {
 
-    @Autowired
-    private JoinDAO jndao;
+    @Autowired private JoinDAO jndao;
 
     // 우편번호 검색
     // 조회결과 출력방법 1 : csv (쉼표로 구분)
@@ -35,7 +34,6 @@ public class JoinServiceImpl implements JoinService {
     // 코드로 json 형태로 결과물을 만들려면 상당히 복잡함
     // ObjectMapper 라이브러리를 이용하면
     // 손쉽게 JSON 유형의 데이터를 생성할 수 있음
-
     @Override
     public String findZipcode(String dong) {
         ObjectMapper mapper = new ObjectMapper();
@@ -43,7 +41,8 @@ public class JoinServiceImpl implements JoinService {
         dong = "%" + dong + "%";
 
         try {
-            json = mapper.writeValueAsString(jndao.selectZipcode(dong));
+            json = mapper.writeValueAsString(
+                    jndao.selectZipcode(dong));
         } catch (JsonProcessingException ex) {
             ex.printStackTrace();
         }
@@ -54,6 +53,7 @@ public class JoinServiceImpl implements JoinService {
     @Override
     public boolean newMember(Member m) {
         boolean result = false;
+
         if (jndao.insertMember(m) > 0) result = true;
 
         return result;
@@ -65,5 +65,8 @@ public class JoinServiceImpl implements JoinService {
     }
 
     @Override
-    public boolean loginMember(Member m) {return false;}
+    public boolean loginMember(Member m) {
+        return false;
+    }
+
 }

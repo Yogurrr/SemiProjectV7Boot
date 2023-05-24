@@ -4,11 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 import yogurrr.springboot.semiprojectv7.model.Checkme;
 import yogurrr.springboot.semiprojectv7.model.Member;
 import yogurrr.springboot.semiprojectv7.service.JoinService;
@@ -68,7 +64,7 @@ public class JoinController {
             sess.invalidate();
         }
 
-        return "join/joinme";
+        return viewPage;
     }
 
     @GetMapping("/joinok")

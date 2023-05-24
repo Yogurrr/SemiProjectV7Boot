@@ -14,7 +14,6 @@ import java.util.List;
 public interface ZipcodeRepository extends PagingAndSortingRepository<Zipcode, Long> {
 
     // 메서드 쿼리 : find엔티티명All, find엔티티명By컬럼명
-
     @Query("from Zipcode where dong like %:dong%")
     List<Zipcode> findZipcodeByDong(@Param("dong") String dong);
 
@@ -22,5 +21,5 @@ public interface ZipcodeRepository extends PagingAndSortingRepository<Zipcode, L
     Page<Zipcode> findAll(Pageable pageable);
 
     // 검색 중 페이징
-    Page<Zipcode> findByDongLike(@Param("dong") String dong, Pageable pageable);
+    Page<Zipcode> findByDongLike(String dong, Pageable pageable);
 }

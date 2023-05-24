@@ -10,7 +10,7 @@ import yogurrr.springboot.semiprojectv7.repository.ZipcodeRepository;
 import java.util.List;
 
 @Repository("jndao")
-public class JoinDAOImpl implements JoinDAO{
+public class JoinDAOImpl implements JoinDAO {
 
     @Autowired
     ZipcodeRepository zipcodeRepository;
@@ -42,4 +42,5 @@ public class JoinDAOImpl implements JoinDAO{
     public int selectOneMember(Member m) {
         return 0;
     }
+
 }
