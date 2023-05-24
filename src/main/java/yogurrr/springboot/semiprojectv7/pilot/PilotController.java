@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -50,6 +52,12 @@ public class PilotController {
             // 파일이름과 생성자 분리하기
             String fileName = fname.split("[.]")[0];
             String fileExt = fname.split("[.]")[1];
+
+            // 겹치지 않는 파일명 작성을 위해 유니크한 값 생성 2
+            String fmt = "yyyyMMddHHmmss";
+            SimpleDateFormat sdf = new SimpleDateFormat(fmt);
+            uuid = sdf.format(new Date());
+            m.addAttribute("uuid", uuid);
 
             // 업로드한 파일 저장하기
             attach.transferTo(new File("C:/Java/bootUpload/" + fileName + uuid + "." + fileExt));
