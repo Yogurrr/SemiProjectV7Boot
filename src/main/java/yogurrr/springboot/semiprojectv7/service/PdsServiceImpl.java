@@ -1,6 +1,8 @@
 package yogurrr.springboot.semiprojectv7.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import yogurrr.springboot.semiprojectv7.dao.PdsDAO;
@@ -57,5 +59,16 @@ public class PdsServiceImpl implements PdsService{
     @Override
     public PdsAttach readOnePdsAttach(int pno) {
         return pdsdao.selectOnePdsAttach(pno);
+    }
+
+    @Override
+    public HttpHeaders getHeader(String fname, String uuid) {
+
+        return pdsUtils.getHeader(fname, uuid);
+    }
+
+    @Override
+    public UrlResource getResource(String fname, String uuid) {
+        return pdsUtils.getResource(fname, uuid);
     }
 }
