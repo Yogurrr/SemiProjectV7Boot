@@ -33,7 +33,7 @@ public class PdsUtils {
         // 파일명1 : abc123.png -> 파일종류 : png
         // pa.setFtype( pa.getFname().split(".")[1] );
         // 파일명2 : abc123.987xyz.jpg -> 파일종류 : jpg
-        int pos = pa.getFname().lastIndexOf(".");
+        int pos = pa.getFname().lastIndexOf(".") + 1;
         String ftype = pa.getFname().substring(pos);
         pa.setFtype(ftype);
 
