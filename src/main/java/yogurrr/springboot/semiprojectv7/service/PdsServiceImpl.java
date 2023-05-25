@@ -55,7 +55,7 @@ public class PdsServiceImpl implements PdsService{
     }
 
     @Override
-    public PdsAttach readPdsAttach(int pno) {
+    public PdsAttach readOnePdsAttach(int pno) {
         return pdsdao.selectOnePdsAttach(pno);
     }
 }

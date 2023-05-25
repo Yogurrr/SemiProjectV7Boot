@@ -15,5 +15,5 @@ public interface PdsService {
 
     Pds readOnePds(int pno);
 
-    PdsAttach readPdsAttach(int pno);
+    PdsAttach readOnePdsAttach(int pno);
 }
