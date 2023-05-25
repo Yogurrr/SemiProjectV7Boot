@@ -3,7 +3,7 @@
       layout:decorate="~{layout/template}">
 
 <th:block layout:fragment="content">
-<div id="main" th:with="pglink=${ #strings.isEmpty(param.fkey) ? '/board/list?cpg=' : '/board/find?ftype='+param.ftype+'&fkey='+param.fkey+'&cpg=' }">
+<div id="main" th:with="pglink=${ #strings.isEmpty(param.fkey) ? '/pds/list?cpg=' : '/pds/find?ftype='+param.ftype+'&fkey='+param.fkey+'&cpg=' }">
 
     <th:block th:if="${cpg gt cntpg}">
         <script th:inline="javascript">
@@ -57,7 +57,7 @@
             <table class="table table-striped thborder">
                 <thead class="thbg">
                 <tr>
-                    <th style="width: 7%;" id="bno">번호</th>
+                    <th style="width: 7%;" id="pno">번호</th>
                     <th style="text-align: center">제목</th>
                     <th style="width: 13%;">작성자</th>
                     <th style="width: 13%;">작성일</th>
@@ -81,7 +81,7 @@
                 </tr>
                 <tr th:each="pds : ${pdslist}">
                     <td th:text="${pds.pno}">&nbsp;</td>
-                    <td><a th:href="|/board/view?pno=${pds.pno}|" th:text="${pds.title}">&nbsp;</a></td>
+                    <td><a th:href="|/pds/view?pno=${pds.pno}|" th:text="${pds.title}">&nbsp;</a></td>
                     <td th:text="${pds.userid}">&nbsp;</td>
                     <td th:text="${#strings.substring(pds.regdate, 0, 10)}">&nbsp;</td>
                     <td>&nbsp;</td>
