@@ -14,7 +14,11 @@ writebtn?.addEventListener('click', () => {
 
 // 목록보기
 // 새글쓰기 버튼
-const newbtn = document.querySelector('#newbtn')
-newbtn?.addEventListener('click', () => {
-    location.href = 'pds/write';
+const go2write = document.querySelector('#go2write')
+go2write?.addEventListener('click', () => {
+    location.href = '/pds/write';
 })
+
+// 목록으로
+const go2list = document.querySelector('#go2list')
+go2list?.addEventListener('click', () => { location.href = '/pds/list?cpg=1' })
