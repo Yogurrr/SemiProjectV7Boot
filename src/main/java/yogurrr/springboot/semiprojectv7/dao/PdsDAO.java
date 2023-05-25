@@ -16,4 +16,6 @@ public interface PdsDAO {
     Pds selectOnePds(int pno);
 
     PdsAttach selectOnePdsAttach(int pno);
+
+    void countDownload(int pno);
 }

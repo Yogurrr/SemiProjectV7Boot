@@ -22,7 +22,7 @@ public class PdsAttach {
     private String fsize;
 
     @Column(insertable = false, updatable = false)
-    private String fdowns;
+    private int fdown;
 
     private Integer pno;
 }

@@ -54,6 +54,12 @@ public class PdsDAOImpl implements PdsDAO{
 
     @Override
     public PdsAttach selectOnePdsAttach(int pno) {
+
         return pdsaRepository.findByPno(pno);
+    }
+
+    @Override
+    public void countDownload(int pno) {
+        pdsaRepository.countDownByPno(pno);
     }
 }
