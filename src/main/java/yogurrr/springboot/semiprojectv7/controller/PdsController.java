@@ -1,6 +1,10 @@
 package yogurrr.springboot.semiprojectv7.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import yogurrr.springboot.semiprojectv7.model.Pds;
+import yogurrr.springboot.semiprojectv7.model.PdsAttach;
 import yogurrr.springboot.semiprojectv7.service.PdsService;
 
 import java.util.Map;
@@ -63,8 +68,22 @@ public class PdsController {
     public String view(int pno, Model m) {
 
         m.addAttribute("pds", pdssrv.readOnePds(pno));
-        m.addAttribute("attach", pdssrv.readPdsAttach(pno));
+        m.addAttribute("attach", pdssrv.readOnePdsAttach(pno));
 
         return "pds/view";
+    }
+
+    @GetMapping("/down")
+    public ResponseEntity<Resource> down(int pno) {
+
+        // 업로드한 파일의 uuid의 파일명 알아냄
+        String fname = pdssrv.readOnePdsAttach(pno).getFname();
+        String uuid = pdssrv.readOnePds(pno).getUuid();
+
+        // 알아낸 uuid와 파일명을 이용해서 header와 리소스 객체 생성
+        HttpHeaders header = pdssrv.getHeader(fname, uuid);
+        UrlResource resource = pdssrv.getResource(fname, uuid);
+
+        return ResponseEntity.ok().headers(header).body(resource);
     }
 }
