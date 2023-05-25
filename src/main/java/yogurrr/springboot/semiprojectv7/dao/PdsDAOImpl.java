@@ -5,14 +5,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
-import yogurrr.springboot.semiprojectv7.model.Board;
 import yogurrr.springboot.semiprojectv7.model.Pds;
 import yogurrr.springboot.semiprojectv7.model.PdsAttach;
 import yogurrr.springboot.semiprojectv7.repository.PdsRepository;
 import yogurrr.springboot.semiprojectv7.repository.PdsaRepository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Repository("pdsdao")
@@ -45,5 +43,15 @@ public class PdsDAOImpl implements PdsDAO{
         pds.put("cntpg", pdsRepository.findAll(paging).getTotalPages());
 
         return pds;
+    }
+
+    @Override
+    public Pds selectOnePds(int pno) {
+        return pdsRepository.findById((long) pno).get();
+    }
+
+    @Override
+    public PdsAttach selectOnePdsAttach(int pno) {
+        return pdsaRepository.findByPno(pno);
     }
 }
