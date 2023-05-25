@@ -26,11 +26,11 @@ public class PdsController {
 
         if (cpg == null || cpg == 0) cpg = 1;
 
-        Map<String, Object> bds = pdssrv.readPds(cpg);
+        Map<String, Object> pds = pdssrv.readPds(cpg);
 
-        mv.addObject("pdslist", bds.get("pdslist"));
+        mv.addObject("pdslist", pds.get("pdslist"));
         mv.addObject("cpg", cpg);
-        mv.addObject("cntpg", bds.get("cntpg"));
+        mv.addObject("cntpg", pds.get("cntpg"));
         mv.addObject("stpg", ((cpg - 1) / 10) * 10 + 1);
 
         mv.setViewName("pds/list");
