@@ -1,11 +1,19 @@
 package yogurrr.springboot.semiprojectv7.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import yogurrr.springboot.semiprojectv7.model.Board;
 import yogurrr.springboot.semiprojectv7.model.Pds;
 import yogurrr.springboot.semiprojectv7.model.PdsAttach;
 import yogurrr.springboot.semiprojectv7.repository.PdsRepository;
 import yogurrr.springboot.semiprojectv7.repository.PdsaRepository;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository("pdsdao")
 public class PdsDAOImpl implements PdsDAO{
@@ -26,5 +34,16 @@ public class PdsDAOImpl implements PdsDAO{
     @Override
     public int insertPdsAttach(PdsAttach pa) {
         return Math.toIntExact(pdsaRepository.save(pa).getPano());
+    }
+
+    @Override
+    public Map<String, Object> selectPds(int cpg) {
+        Pageable paging = PageRequest.of(cpg, 25, Sort.by("pno").descending());
+
+        Map<String, Object> pds = new HashMap<>();
+        pds.put("pdslist", pdsRepository.findAll(paging).getContent());
+        pds.put("cntpg", pdsRepository.findAll(paging).getTotalPages());
+
+        return pds;
     }
 }
