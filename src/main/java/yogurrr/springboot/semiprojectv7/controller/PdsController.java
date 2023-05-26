@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import yogurrr.springboot.semiprojectv7.model.Pds;
 import yogurrr.springboot.semiprojectv7.model.PdsAttach;
+import yogurrr.springboot.semiprojectv7.model.PdsReply;
 import yogurrr.springboot.semiprojectv7.service.PdsService;
 
 import java.util.List;
@@ -93,5 +94,14 @@ public class PdsController {
         pdssrv.downfile(pno);
 
         return ResponseEntity.ok().headers(header).body(resource);
+    }
+
+    @PostMapping("/replyok")
+    public String replyok(PdsReply pdsReply) {
+        String viewPage = "error";
+
+        if (pdssrv.newReply(pdsReply)) viewPage = "redirect:/pds/view?rpno=";
+
+        return viewPage;
     }
 }

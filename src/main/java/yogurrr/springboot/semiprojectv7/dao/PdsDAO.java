@@ -24,4 +24,6 @@ public interface PdsDAO {
     List<String> selectFtypes();
 
     List<PdsReply> selectPdsReply(int pno);
+
+    int insertReply(PdsReply reply);
 }
