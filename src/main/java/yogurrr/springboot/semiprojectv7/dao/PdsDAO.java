@@ -2,6 +2,7 @@ package yogurrr.springboot.semiprojectv7.dao;
 
 import yogurrr.springboot.semiprojectv7.model.Pds;
 import yogurrr.springboot.semiprojectv7.model.PdsAttach;
+import yogurrr.springboot.semiprojectv7.model.PdsReply;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +22,6 @@ public interface PdsDAO {
     void countDownload(int pno);
 
     List<String> selectFtypes();
+
+    List<PdsReply> selectPdsReply(int pno);
 }

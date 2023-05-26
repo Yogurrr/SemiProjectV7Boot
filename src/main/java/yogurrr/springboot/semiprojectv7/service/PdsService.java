@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.multipart.MultipartFile;
 import yogurrr.springboot.semiprojectv7.model.Pds;
 import yogurrr.springboot.semiprojectv7.model.PdsAttach;
+import yogurrr.springboot.semiprojectv7.model.PdsReply;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,6 @@ public interface PdsService {
     void downfile(int pno);
 
     List<String> readFtype();
+
+    List<PdsReply> readPdsReply(int pno);
 }

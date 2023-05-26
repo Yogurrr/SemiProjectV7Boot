@@ -7,6 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import yogurrr.springboot.semiprojectv7.model.Pds;
 import yogurrr.springboot.semiprojectv7.model.PdsAttach;
+import yogurrr.springboot.semiprojectv7.model.PdsReply;
+import yogurrr.springboot.semiprojectv7.repository.PdsReplyRepository;
 import yogurrr.springboot.semiprojectv7.repository.PdsRepository;
 import yogurrr.springboot.semiprojectv7.repository.PdsaRepository;
 
@@ -22,6 +24,9 @@ public class PdsDAOImpl implements PdsDAO{
 
     @Autowired
     PdsaRepository pdsaRepository;
+
+    @Autowired
+    PdsReplyRepository pdsReplyRepository;
 
     @Override
     public int insertPds(Pds pds) {
@@ -67,5 +72,10 @@ public class PdsDAOImpl implements PdsDAO{
     @Override
     public List<String> selectFtypes() {
         return pdsaRepository.findByFtypes();
+    }
+
+    @Override
+    public List<PdsReply> selectPdsReply(int pno) {
+        return pdsReplyRepository.findByPnoOrderByRefnoAscRegdateAsc(pno);
     }
 }
