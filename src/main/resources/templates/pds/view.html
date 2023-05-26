@@ -80,7 +80,9 @@
                         <td style="width: 25%"><h4 th:text="${rp.userid}"></h4></td>   <!-- 댓글시작 -->
                         <td>
                             <div style="background-color: #d9edf7; padding: 5px;"> [[${rp.regdate}]]
-                                <span style="float: right"><a th:href="|javascript:showComment(${rp.rpno})|">[추가]</a> / [수정] / [삭제]</span>
+                                <th:block th:if="${!#strings.isEmpty(session.UID)}">
+                                    <span style="float: right"><a th:href="|javascript:showComment(${rp.rpno})|">[추가]</a> / [수정] / [삭제]</span>
+                                </th:block>
                             </div>
                             <p style="padding: 5px 0;" th:text="${rp.reply}"></p>
                         </td>
@@ -90,7 +92,9 @@
                         <td style="width: 25%"><h4 th:text="${rp.userid}">&nbsp;</h4></td>   <!-- 대댓글시작 -->
                         <td>
                             <div style="background-color: lightpink; padding: 5px;"> [[${rp.regdate}]]
-                                <span style="float: right">[수정] / [삭제]</span>
+                                <th:block th:if="${!#strings.isEmpty(session.UID)}">
+                                    <span style="float: right">[수정] / [삭제]</span>
+                                </th:block>
                             </div>
                             <p style="padding: 5px 0;" th:text="${rp.reply}"></p>
                         </td>
