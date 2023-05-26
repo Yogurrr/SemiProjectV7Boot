@@ -22,3 +22,18 @@ go2write?.addEventListener('click', () => {
 // 목록으로
 const go2list = document.querySelector('#go2list')
 go2list?.addEventListener('click', () => { location.href = '/pds/list?cpg=1' })
+
+// 본문보기
+// 댓글쓰기
+const rpnewbtn = document.querySelector('#rpnewbtn')
+rpnewbtn?.addEventListener('click', () => {
+    const rpfrm = document.forms.rpfrm;
+    if (rpfrm.reply.value === '') alert('댓글을 작성하세요!');
+    else if (rpfrm.userid.value === '') alert('작성자가 없습니다!');
+    else if (rpfrm.pno.value === '') alert('원댓글 번호가 없습니다!');
+    else {
+        rpfrm.method = 'post';
+        rpfrm.action = 'pds/replyok';
+        rpfrm.submit();
+    }
+})
