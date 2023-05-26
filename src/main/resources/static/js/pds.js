@@ -33,7 +33,7 @@ rpnewbtn?.addEventListener('click', () => {
     else if (rpfrm.pno.value === '') alert('원댓글 번호가 없습니다!');
     else {
         rpfrm.method = 'post';
-        rpfrm.action = 'pds/replyok';
+        rpfrm.action = '/pds/replyok';
         rpfrm.submit();
     }
 })
