@@ -81,9 +81,12 @@ public class PdsDAOImpl implements PdsDAO{
 
     @Override
     public int insertReply(PdsReply reply) {
-        PdsReply p = pdsReplyRepository.save(reply);
-        pdsReplyRepository.updateRefno(p.getRpno());
 
-        return Math.toIntExact(p.getRpno());
+        PdsReply p = pdsReplyRepository.save(reply);
+        int rpno = Math.toIntExact(p.getRpno());
+
+        pdsReplyRepository.updateRefno(rpno);
+
+        return rpno;
     }
 }

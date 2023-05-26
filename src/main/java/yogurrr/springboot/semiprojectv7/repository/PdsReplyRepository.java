@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import yogurrr.springboot.semiprojectv7.model.PdsReply;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface PdsReplyRepository extends JpaRepository<PdsReply, Long> {
@@ -16,6 +16,6 @@ public interface PdsReplyRepository extends JpaRepository<PdsReply, Long> {
 
     @Transactional
     @Modifying
-    @Query("update PdsReply set refno = :refno where rpno = :rpno")
-    void updateRefno(@Param("rpno") Long rpno);
+    @Query("update PdsReply set refno = :rpno where rpno = :rpno")
+    void updateRefno(@Param("rpno") int rpno);
 }

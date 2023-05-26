@@ -97,10 +97,10 @@ public class PdsController {
     }
 
     @PostMapping("/replyok")
-    public String replyok(PdsReply pdsReply) {
+    public String replyok(PdsReply reply) {
         String viewPage = "error";
 
-        if (pdssrv.newReply(pdsReply)) viewPage = "redirect:/pds/view?rpno=";
+        if (pdssrv.newReply(reply)) viewPage = "redirect:/pds/view?pno=" + reply.getPno();
 
         return viewPage;
     }
