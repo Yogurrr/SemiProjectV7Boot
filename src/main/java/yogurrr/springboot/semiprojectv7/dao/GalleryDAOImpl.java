@@ -45,8 +45,8 @@ public class GalleryDAOImpl implements GalleryDAO{
 
         Map<String, Object> gals = new HashMap<>();
         // Gallery와 GalAttach를 조인해서 리스트로 가져옴
-        gals.put("gallist", galrepo.findAllBy(paging).getContent());
-        gals.put("cntpg", galrepo.findAllBy(paging).getTotalPages());
+        gals.put("gallist", galarepo.findAllBy(paging).getContent());
+        gals.put("cntpg", galarepo.findAllBy(paging).getTotalPages());
 
         return gals;
     }
