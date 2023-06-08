@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import yogurrr.springboot.semiprojectv7.model.GalAttach;
 import yogurrr.springboot.semiprojectv7.model.GalleryList;
-
+import yogurrr.springboot.semiprojectv7.model.GalleryView;
 
 
 public interface GalleryaRepository extends JpaRepository<GalAttach, Long> {
@@ -15,4 +15,6 @@ public interface GalleryaRepository extends JpaRepository<GalAttach, Long> {
     // => Gallery와 GalAttach를 조인한 뒤 그 결과들 중 일부만 가져오고 싶다 => 프로젝션 이용
     // @Query("select g, a from Gallery g inner join GalAttach a on g.gno = a.gno")
      Page<GalleryList> findAllBy(Pageable paging);
+
+     GalleryView findAllByGno(int gno);
 }
