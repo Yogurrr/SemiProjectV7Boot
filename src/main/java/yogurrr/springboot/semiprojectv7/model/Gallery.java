@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "pds")
+@Table(name = "gallery")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +21,6 @@ public class Gallery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gno;
 
-    @NotBlank(message = "제목은 필수항목입니다!!")
     private String title;
     @NotBlank(message = "작성자는 필수항목입니다!!")
     private String userid;

@@ -29,10 +29,11 @@
 
         <div class="row mt-2 offset-2 col-8">
             <form class="card card-body bg-light" name="galfrm" id="galfrm" th:object="${gallery}">
-                <div class="row">
-                    <label class="col-3 col-form-label text-danger text-end" for="title">다중첨부 이미지파일</label>
+
+                <div class="row mt-2">
+                    <label class="col-3 col-form-label text-danger text-end" for="title">제목</label>
                     <div class="col-6">
-                        <input type="file" name="attachs" id="attachs" multiple="multiple" class="form-control border-danger">
+                        <input type="text" name="title" id="title" class="form-control border-danger bg-light">
                         <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-warning"></span>
                     </div>
                 </div>
@@ -46,6 +47,14 @@
                 </div>
 
                 <div class="row mt-2">
+                    <label class="col-3 col-form-label text-danger text-end" for="attachs">다중첨부 이미지파일</label>
+                    <div class="col-6">
+                        <input type="file" name="attachs" id="attachs" multiple="multiple" class="form-control border-danger">
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-warning"></span>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
                     <label class="col-3 col-form-label text-danger text-end" for="contents">본문</label>
                     <div class="col-6">
                         <textarea name="contents" id="contents" class="form-control border-danger" rows="15"></textarea>
@@ -53,12 +62,12 @@
                     </div>
                 </div>
 
-                <div class="row mt-2">
+                <!--<div class="row mt-2">
                     <label class="col-3 col-form-label text-danger text-end" for="userid">첨부파일</label>
                     <div class="col-6">
                         <input type="file" name="attach" id="attach" class="form-control border-danger bg-light">
                     </div>
-                </div>
+                </div>-->
 
                 <div class="row mt-2">
                     <label class="col-3 col-form-label text-danger text-end" for="grecaptcha">자동가입방지</label>

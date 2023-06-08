@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pdsattach")
+@Table(name = "galattach")
 @Getter
 @Setter
 @NoArgsConstructor

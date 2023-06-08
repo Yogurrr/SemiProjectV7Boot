@@ -45,12 +45,12 @@
             <div th:each="gal : ${#numbers.sequence(1, 24)}" class="card col-12 m-3" style="width: 18rem;">
                 <img src="http://localhost/cdn/sleeping_cat.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">갤러리 제목</h5>
-                    <p class="card-text">작성자 <span class="text-end">2023-06-07</span></p>
+                    <h5 class="card-title row">갤러리 제목</h5>
+                    <p class="card-text row">작성자 <span class="col text-end">2023-06-07</span></p>
                     <p class="card-text row">
                         <span class="row justify-content-end pe-0">
-                            <i class="col-auto fa-regular fa-eye">123</i>
-                            <i class="col-auto fa-regular fa-thumbs-up">456</i>
+                            <i class="col-auto pe-0 fa-regular fa-eye">123</i>
+                            <i class="col-auto pe-0 fa-regular fa-thumbs-up">456</i>
                         </span>
                     </p>
                 </div>
