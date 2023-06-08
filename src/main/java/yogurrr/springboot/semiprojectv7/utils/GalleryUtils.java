@@ -57,7 +57,7 @@ public class GalleryUtils {
 
                 // 첨부파일 정보를 리스트에 저장
                 fnames.add(fullname);   // 파일이름UUID.확장자
-                fnames.add(fsize);
+                fsizes.add(fsize);
                 System.out.println(fname + "," + fsize + "," + savefname);
 
             } catch (Exception ex) {
